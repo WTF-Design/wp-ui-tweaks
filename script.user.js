@@ -16,7 +16,7 @@
 	if (!document.querySelector(`[src*="${location.host}/wp-content"`)) return false;
 
 	// Are we already logged in?
-	if (!document.body.classList.contains("logged-in")) return false;
+	if (document.body.classList.contains("logged-in")) return false;
 
 `
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
