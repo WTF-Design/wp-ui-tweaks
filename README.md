@@ -6,7 +6,7 @@ User script for augmenting WordPress development and administration.
   - [Violentmonkey](https://violentmonkey.github.io/) is recommended
 
 ## Installation
-- [Click here](https://github.com/wtfdesign/wordpress-ui-tweaks/raw/main/script.user.js) to install/update
+- [Click here](https://github.com/WTF-Design/wordpress-ui-tweaks/raw/main/script.user.js) to install/update
 
 ## Features
 - A login button for simple sites from simple developers
