@@ -15,4 +15,4 @@ User script for augmenting WordPress development and administration.
 1.0.20240904
 - Initial release
 
-WordPress logo is the property of [PortlandLabs](https://www.portlandlabs.com/) and is embedded in and used from the user script meta data block in order to keep things as lean and self-contained as possible.
+WordPress logo is the property of [WordPress Foundation](https://wordpressfoundation.org/) and is embedded in and used from the user script meta data block in order to keep things as lean and self-contained as possible.
