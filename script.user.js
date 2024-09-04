@@ -4,7 +4,7 @@
 // @namespace   wtfdesign
 // @include     *
 // @grant       none
-// @version     1.1.20240904
+// @version     1.0.20240904
 // @author      wtflm
 // @description WordPress Developer/Admin UI tweaks
 // ==/UserScript==
