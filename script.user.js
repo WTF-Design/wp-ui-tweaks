@@ -37,9 +37,10 @@
 		console.log("WordPress login page found.");
 		
 		const loginLink = document.createElement("a");
-		loginLink.innerHTML = `<img width="24" height="24" alt="Login" src="${GM.info.script.icon}"/>`;
+		loginLink.innerHTML = `<img alt="Login" src="${GM.info.script.icon}"/>`;
 		loginLink.href = `//${location.host}/wp-login.php`;
 		loginLink.title = "Login";
+		loginLink.style.height = "24px";
 		loginLink.style.position = "fixed";
 		loginLink.style.inset = "3px 3px auto auto";
 		loginLink.style.zIndex = "999";
