@@ -20,4 +20,5 @@ User script for augmenting WordPress development and administration.
 
 WordPress logo is the property of [WordPress Foundation](https://wordpressfoundation.org/) and is embedded in and used from the user script meta data block in order to keep things as lean and self-contained as possible.
 
-Uses [Google Fonts Icons](https://fonts.google.com/icons)
+## Aknowledgements
+Uses [Google Material Symbols](https://fonts.google.com/icons) under the [Apache License Version 2.0](Google-Material-Symbols-LICENSE.txt).
