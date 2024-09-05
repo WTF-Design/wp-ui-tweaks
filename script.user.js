@@ -4,7 +4,7 @@
 // @namespace   wtfdesign
 // @include     *
 // @grant       none
-// @version     1.0.20240904
+// @version     1.1.20240905
 // @author      wtflm
 // @description WordPress Developer/Admin UI tweaks
 // ==/UserScript==
@@ -21,12 +21,6 @@
 	// Do we happen to already be on the login page?
 	if (document.querySelector(`form[action*="wp-login.php"]`)) return false;
 
-`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
-<path d="M480-120v-80h280v-560H480v-80h280q33 0 57 24t23 56v560q0 33-23 57t-57 23H480Zm-80-160-55-58 102-102H120v-80h327L345-622l55-58 200 200-200 200Z"/>
-</svg>
-`;
-
 	fetch(`//${location.host}/wp-login.php`)
 	.then(response => response.text())
 	.then(html => {
@@ -36,16 +30,24 @@
 
 		console.log("WordPress login page found.");
 		
+		const loginIcon = `
+			<svg fill="#fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+				<path d="M480-120v-80h280v-560H480v-80h280q33 0 57 24t23 56v560q0 33-23 57t-57 23H480Zm-80-160-55-58 102-102H120v-80h327L345-622l55-58 200 200-200 200Z"/>
+			</svg>
+		`;
+
 		const loginLink = document.createElement("a");
-		loginLink.innerHTML = `<img alt="Login" src="${GM.info.script.icon}"/>`;
+		loginLink.innerHTML = `<img alt="Login" style="display:block" src="data:image/svg+xml,${encodeURIComponent(loginIcon.trim())}">`;
 		loginLink.href = `//${location.host}/wp-login.php`;
 		loginLink.title = "Login";
-		loginLink.style.width = "24px";
-		loginLink.style.height = "24px";
-		loginLink.style.position = "fixed";
-		loginLink.style.inset = "3px 3px auto auto";
-		loginLink.style.zIndex = "999";
+		Object.assign(loginLink.style, {
+			width: "24px",
+			height: "24px",
+			position: "fixed",
+			inset: "3px 3px auto auto",
+			zIndex: "9999",
+			mixBlendMode: "difference",
+		});
 		document.body.appendChild(loginLink);
-
 	});
 }());
