@@ -4,7 +4,7 @@
 // @namespace   wtfdesign
 // @include     *
 // @grant       none
-// @version     1.3.20240910
+// @version     1.4.0
 // @author      wtflm
 // @description WordPress Developer/Admin UI tweaks
 // ==/UserScript==
@@ -19,7 +19,7 @@
 	if (!document.querySelector(`[src*="${location.host}/wp-content"`)) return false;
 
 	// Are we already logged in?
-	if (document.body.classList.contains("logged-in")) return false;
+	if (document.body.classList.contains("wp-admin")) return false;
 
 	// Do we happen to already be on the login page?
 	if (document.querySelector(`form[action*="wp-login.php"]`)) return false;

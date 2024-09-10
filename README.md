@@ -12,6 +12,9 @@ User script for augmenting WordPress development and administration.
 - A login button for simple sites from simple developers
 
 ## Changelog
+1.4.0
+- Semantic versioning and improved logged-innes detection
+
 1.3.20240910
 - Supply in-house icon, disassociate from any official WP branding
 
