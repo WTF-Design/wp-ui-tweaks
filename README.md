@@ -1,4 +1,4 @@
-# WP UI Tweaks
+# WTF WP UI Tweaks
 User script for augmenting WordPress development and administration.
 
 ## Requirements
