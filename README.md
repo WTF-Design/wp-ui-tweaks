@@ -1,4 +1,4 @@
-# WTF WP UI Tweaks
+# ![WP](wp-wtf-gradient-optimized.svg) WTF WP UI Tweaks
 User script for augmenting WordPress development and administration.
 
 ## Requirements
