@@ -4,7 +4,7 @@
 // @namespace   wtfdesign
 // @include     *
 // @grant       none
-// @version     1.4.0
+// @version     1.5.0
 // @author      wtflm
 // @description WordPress Developer/Admin UI tweaks
 // ==/UserScript==
@@ -35,12 +35,39 @@
 		
 		const loginIcon = `
 			<svg fill="#fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
-				<path d="M480-120v-80h280v-560H480v-80h280q33 0 57 24t23 56v560q0 33-23 57t-57 23H480Zm-80-160-55-58 102-102H120v-80h327L345-622l55-58 200 200-200 200Z"/>
+				<defs>
+					<style>
+						@keyframes inee {
+							33.333% {
+								translate: 60% 0;
+								animation-timing-function: step-start;
+							}
+							66.667% {
+								translate: -60% 0;
+							}
+						}
+						.loginLink g path {
+							animation: inee 1s linear infinite;
+							animation-play-state: paused;
+						}
+						.loginLink:hover g path {
+							animation-play-state: running;
+						}
+					</style>
+				</defs>
+				<clipPath id="clip">
+					<path d="M120-760h560v560H120z"/>
+				</clipPath>
+				<g clip-path="url(#clip)">
+					<path d="m400-280-55-58 102-102H120v-80h327L345-622l55-58 200 200z"/>
+				</g>
+				<path d="M480-120v-80h280v-560H480v-80h280q33 0 57 24 23 23 23 56v560q0 33-23 57-24 23-57 23Z"/>
 			</svg>
 		`;
 
 		const loginLink = document.createElement("a");
-		loginLink.innerHTML = `<img alt="Login" style="display:block" src="data:image/svg+xml,${encodeURIComponent(loginIcon.trim())}">`;
+		loginLink.className = "loginLink";
+		loginLink.innerHTML = loginIcon;
 		loginLink.href = `//${location.host}/wp-login.php`;
 		loginLink.title = "Login";
 		Object.assign(loginLink.style, {
