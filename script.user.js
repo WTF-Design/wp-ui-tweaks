@@ -4,7 +4,7 @@
 // @namespace   wtfdesign
 // @include     *
 // @grant       none
-// @version     1.5.0
+// @version     1.6.0
 // @author      wtflm
 // @description WordPress Developer/Admin UI tweaks
 // ==/UserScript==
@@ -32,7 +32,7 @@
 		if (!loginPage.querySelector(`form[action*="wp-login.php"]`)) return false;
 
 		console.log("WordPress login page found.");
-		
+
 		const loginIcon = `
 			<svg fill="#fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
 				<defs>
@@ -49,9 +49,6 @@
 						.loginLink g path {
 							animation: inee 1s linear infinite;
 							animation-play-state: paused;
-						}
-						.loginLink:hover g path {
-							animation-play-state: running;
 						}
 					</style>
 				</defs>
@@ -79,5 +76,12 @@
 			mixBlendMode: "difference",
 		});
 		document.body.appendChild(loginLink);
+		arrow = loginLink.querySelector(`g path`);
+		loginLink.addEventListener("mouseenter", () => arrow.style.animationPlayState = "running");
+		loginLink.addEventListener("mouseleave", () => {
+			arrow.addEventListener("animationiteration", ev => {
+				if (!loginLink.matches(`:hover`)) arrow.style.animationPlayState = "paused";
+			});
+		}, {once: true});
 	});
 }());
