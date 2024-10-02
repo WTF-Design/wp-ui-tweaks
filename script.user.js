@@ -4,7 +4,7 @@
 // @namespace   wtfdesign
 // @include     *
 // @grant       none
-// @version     1.6.0
+// @version     1.6.1
 // @author      wtflm
 // @description WordPress Developer/Admin UI tweaks
 // ==/UserScript==
@@ -27,11 +27,10 @@
 	fetch(`//${location.host}/wp-login.php`)
 	.then(response => response.text())
 	.then(html => {
+		console.log("WordPress login page found.");
+
 		const parser = new DOMParser();
 		const loginPage = parser.parseFromString(html, "text/html");
-		if (!loginPage.querySelector(`form[action*="wp-login.php"]`)) return false;
-
-		console.log("WordPress login page found.");
 
 		const loginIcon = `
 			<svg fill="#fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">

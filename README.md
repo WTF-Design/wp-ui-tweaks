@@ -12,6 +12,9 @@ User script for augmenting WordPress development and administration.
 - A login button for simple sites from simple developers
 
 ## Changelog
+1.6.1
+- Cleanup
+
 1.6.0
 - Finish animation cycle before pausing on mouseleave
 
