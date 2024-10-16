@@ -4,7 +4,7 @@
 // @namespace   wtfdesign
 // @include     *
 // @grant       none
-// @version     1.6.1
+// @version     1.7.0
 // @author      wtflm
 // @description WordPress Developer/Admin UI tweaks
 // ==/UserScript==
@@ -15,22 +15,22 @@
 	// Don't run in iframes
 	if (window.self !== window.top) return false;
 
-	// Does it look like a WordPress site?
-	if (!document.querySelector(`[src*="${location.host}/wp-content"`)) return false;
-
 	// Are we already logged in?
 	if (document.body.classList.contains("wp-admin")) return false;
 
+	// Does it look like a WordPress site?
+	if (!document.querySelector(`[src*="${location.host}/wp-content"`)) return false;
+
 	// Do we happen to already be on the login page?
-	if (document.querySelector(`form[action*="wp-login.php"]`)) return false;
+	if (document.querySelector(`form#loginform #wp-submit`)) return false;
 
-	fetch(`//${location.host}/wp-login.php`)
-	.then(response => response.text())
-	.then(html => {
-		console.log("WordPress login page found.");
+	fetch(`//${location.host}/wp-admin`)
+	.then(response => {
 
-		const parser = new DOMParser();
-		const loginPage = parser.parseFromString(html, "text/html");
+		// Login page isn't there or is hidden too well 
+		if (!response.ok) return false;
+
+        console.log("WordPress login page found.");
 
 		const loginIcon = `
 			<svg fill="#fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
@@ -64,7 +64,7 @@
 		const loginLink = document.createElement("a");
 		loginLink.className = "loginLink";
 		loginLink.innerHTML = loginIcon;
-		loginLink.href = `//${location.host}/wp-login.php`;
+		loginLink.href = `//${location.host}/wp-admin`;
 		loginLink.title = "Login";
 		Object.assign(loginLink.style, {
 			width: "24px",
