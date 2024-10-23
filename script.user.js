@@ -4,7 +4,7 @@
 // @namespace   wtfdesign
 // @include     *
 // @grant       none
-// @version     1.7.0
+// @version     1.8.0
 // @author      wtflm
 // @description WordPress Developer/Admin UI tweaks
 // ==/UserScript==
@@ -45,9 +45,14 @@
 								translate: -60% 0;
 							}
 						}
-						.loginLink g path {
-							animation: inee 1s linear infinite;
-							animation-play-state: paused;
+						.loginLink {
+							svg {
+								vertical-align: unset;
+							}
+							g path {
+								animation: inee 1s linear infinite;
+								animation-play-state: paused;
+							}
 						}
 					</style>
 				</defs>

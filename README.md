@@ -12,6 +12,9 @@ User script for augmenting WordPress development and administration.
 - A login button for simple sites from simple developers
 
 ## Changelog
+1.8.0
+- Fix login symbol vertical alignment where affected by site styles.
+
 1.7.0
 - Improve login page detection by looking for `/wp-admin` instead of
   `/wp-login.php`. On tested sites the former seems to redirect to actual login
