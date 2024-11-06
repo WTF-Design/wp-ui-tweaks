@@ -4,7 +4,7 @@
 // @namespace   wtfdesign
 // @include     *
 // @grant       none
-// @version     1.8.0
+// @version     1.9.0
 // @author      wtflm
 // @description WordPress Developer/Admin UI tweaks
 // ==/UserScript==
@@ -24,13 +24,16 @@
 	// Do we happen to already be on the login page?
 	if (document.querySelector(`form#loginform #wp-submit`)) return false;
 
+	// Upgrade insecure requests resulting from /wp-admin redirects
+	document.head.insertAdjacentHTML("beforeend", '<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">');
+
 	fetch(`//${location.host}/wp-admin`)
 	.then(response => {
 
-		// Login page isn't there or is hidden too well 
+		// Login page isn't there or is hidden too well
 		if (!response.ok) return false;
 
-        console.log("WordPress login page found.");
+		console.log("WordPress login page found.");
 
 		const loginIcon = `
 			<svg fill="#fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
@@ -79,6 +82,7 @@
 			zIndex: "9999",
 			mixBlendMode: "difference",
 		});
+
 		document.body.appendChild(loginLink);
 		arrow = loginLink.querySelector(`g path`);
 		loginLink.addEventListener("mouseenter", () => arrow.style.animationPlayState = "running");
