@@ -12,6 +12,9 @@ User script for augmenting WordPress development and administration.
 - A login button for simple sites from simple developers
 
 ## Changelog
+1.9.1
+- Fix site detection to also look for href links into wp-content, not just src.
+
 1.9.0
 - Upgrade insecure requests to counteract /wp-admin redirects resulting in
   script blockage from mixed active content loading
