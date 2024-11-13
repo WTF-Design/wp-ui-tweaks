@@ -12,6 +12,9 @@ User script for augmenting WordPress development and administration.
 - A login button for simple sites from simple developers
 
 ## Changelog
+1.9.2
+- Fix admin detection to look for #adminbar in addition to .wp-admin.
+
 1.9.1
 - Fix site detection to also look for href links into wp-content, not just src.
 
