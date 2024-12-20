@@ -4,7 +4,7 @@
 // @namespace   wtfdesign
 // @include     *
 // @grant       none
-// @version     1.9.2
+// @version     1.9.3
 // @author      wtflm
 // @description WordPress Developer/Admin UI tweaks
 // ==/UserScript==
@@ -80,7 +80,7 @@
 			height: "24px",
 			position: "fixed",
 			inset: "3px 3px auto auto",
-			zIndex: "9999",
+			zIndex: "99999",
 			mixBlendMode: "difference",
 		});
 

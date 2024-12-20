@@ -12,6 +12,9 @@ User script for augmenting WordPress development and administration.
 - A login button for simple sites from simple developers
 
 ## Changelog
+1.9.3
+- Up those rookie numbers.
+
 1.9.2
 - Fix admin detection to look for #adminbar in addition to .wp-admin.
 
