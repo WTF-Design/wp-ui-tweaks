@@ -12,6 +12,13 @@ User script for augmenting WordPress development and administration.
 - A login button for simple sites from simple developers
 
 ## Changelog
+1.9.4
+- Replaced `@include` list with an `@exclude` list. The rationale is omitting
+  `@include`s should have the same effect as the `@include *` we were using
+  previously and the newly introduced `@exclude` is meant to curtail any HTTP
+  Basic Authentication prompts on sites which have chosen to use that to
+  protect their login page
+
 1.9.3
 - Up those rookie numbers.
 
