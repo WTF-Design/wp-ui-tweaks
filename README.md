@@ -12,6 +12,9 @@ User script for augmenting WordPress development and administration.
 - A login button for simple sites from simple developers
 
 ## Changelog
+1.9.5
+- Exclude tecadmin.net.
+
 1.9.4
 - Replaced `@include` list with an `@exclude` list. The rationale is omitting
   `@include`s should have the same effect as the `@include *` we were using
