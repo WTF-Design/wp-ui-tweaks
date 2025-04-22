@@ -21,7 +21,7 @@
 	if (document.getElementById("wpadminbar")) return false;
 
 	// Are we in Breakdance Builder?
-	if (document.body.querySelector(`header.breakdance-topbar`)) return false;
+	if (window.hasOwnProperty("Breakdance")) return false;
 
 	// Does it look like a WordPress site?
 	if (!document.querySelector(`[src*="${location.host}/wp-content"], [href*="${location.host}/wp-content"]`)) return false;
