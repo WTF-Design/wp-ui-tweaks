@@ -5,7 +5,7 @@
 // @exclude     /wpbeginner\.com/
 // @exclude     /tecadmin\.net/
 // @grant       none
-// @version     1.9.5
+// @version     1.9.6
 // @author      wtflm
 // @description WordPress Developer/Admin UI tweaks
 // ==/UserScript==
@@ -19,6 +19,9 @@
 	// Are we already logged in?
 	if (document.body.classList.contains("wp-admin")) return false;
 	if (document.getElementById("wpadminbar")) return false;
+
+	// Are we in Breakdance Builder?
+	if (document.body.querySelector(`header.breakdance-topbar`)) return false;
 
 	// Does it look like a WordPress site?
 	if (!document.querySelector(`[src*="${location.host}/wp-content"], [href*="${location.host}/wp-content"]`)) return false;

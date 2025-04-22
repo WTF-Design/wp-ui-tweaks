@@ -12,6 +12,9 @@ User script for augmenting WordPress development and administration.
 - A login button for simple sites from simple developers
 
 ## Changelog
+1.9.6
+- Consider the presence of Breakdance Builder as sign of logged-innes.
+
 1.9.5
 - Exclude tecadmin.net.
 
