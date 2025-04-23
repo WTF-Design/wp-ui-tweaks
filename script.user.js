@@ -4,97 +4,144 @@
 // @namespace   wtfdesign
 // @exclude     /wpbeginner\.com/
 // @exclude     /tecadmin\.net/
-// @grant       none
-// @version     1.9.6
+// @grant       GM_registerMenuCommand
+// @version     2.0.0
 // @author      wtflm
 // @description WordPress Developer/Admin UI tweaks
 // ==/UserScript==
 
 // Show a login button
 (function() {
-
 	// Don't run in iframes
 	if (window.self !== window.top) return false;
 
-	// Are we already logged in?
-	if (document.body.classList.contains("wp-admin")) return false;
-	if (document.getElementById("wpadminbar")) return false;
+	let defaultLoginURL = `//${location.host}/wp-admin`;
+	let loginURL = localStorage.wtfWpLoginURL ?? defaultLoginURL;
 
-	// Are we in Breakdance Builder?
-	if (window.hasOwnProperty("Breakdance")) return false;
+	let menuCommandLabels = {
+		set: "Set site custom WordPress login URL",
+		chg: `Change login URL ${loginURL}`,
+		fix: "Fix site custom WordPress login URL!",
+	};
+	let menuCommandTitles = {
+		set: "Set site custom WordPress login URL",
+		chg: `Currently set to ${loginURL}`,
+		fix: `${loginURL} isn't resolving!`,
+	};
 
-	// Does it look like a WordPress site?
-	if (!document.querySelector(`[src*="${location.host}/wp-content"], [href*="${location.host}/wp-content"]`)) return false;
+	let promptForLoginUrl = function() {
+		loginURL = prompt(`WTF WP UI Tweaks: Set site custom WordPress login URL. Leave blank to restore the default:\n${defaultLoginURL}`, loginURL != defaultLoginURL ? loginURL : "")
+		if (loginURL.length && loginURL != defaultLoginURL) {
+			localStorage.wtfWpLoginURL = loginURL;
+			checkLoginPage();
+		} else {
+			localStorage.removeItem("wtfWpLoginURL");
+			loginURL = defaultLoginURL;
+			GM_registerMenuCommand(menuCommandLabels.set, promptForLoginUrl, {id: "menuCommand", title: menuCommandTitles.set, autoClose: false});
+			checkLoginPage();
+		}
+	};
 
-	// Do we happen to already be on the login page?
-	if (document.querySelector(`form#loginform #wp-submit`)) return false;
+	GM_registerMenuCommand(menuCommandLabels.set, promptForLoginUrl, {id: "menuCommand", title: menuCommandTitles.set, autoClose: false});
 
 	// Upgrade insecure requests resulting from /wp-admin redirects
 	document.head.insertAdjacentHTML("beforeend", '<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">');
 
-	fetch(`//${location.host}/wp-admin`)
-	.then(response => {
+	let checkLoginPage = function() {
+		fetch(loginURL)
+		.then(response => {
 
-		// Login page isn't there or is hidden too well
-		if (!response.ok) return false;
+			// Login page isn't there or is hidden too well
+			if (!response.ok) {
+				GM_registerMenuCommand(menuCommandLabels.fix, promptForLoginUrl, {id: "menuCommand", title: menuCommandTitles.fix, autoClose: false});
+				return false;
+			}
 
-		console.log("WordPress login page found.");
+			if (loginURL != defaultLoginURL) {
+				GM_registerMenuCommand(menuCommandLabels.chg, promptForLoginUrl, {id: "menuCommand", title: menuCommandTitles.chg, autoClose: false});
+			}
 
-		const loginIcon = `
-			<svg fill="#fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
-				<defs>
-					<style>
-						@keyframes inee {
-							33.333% {
-								translate: 60% 0;
-								animation-timing-function: step-start;
-							}
-							66.667% {
-								translate: -60% 0;
-							}
-						}
-						.loginLink {
-							svg {
-								vertical-align: unset;
-							}
-							g path {
-								animation: inee 1s linear infinite;
-								animation-play-state: paused;
-							}
-						}
-					</style>
-				</defs>
-				<clipPath id="clip">
-					<path d="M120-760h560v560H120z"/>
-				</clipPath>
-				<g clip-path="url(#clip)">
-					<path d="m400-280-55-58 102-102H120v-80h327L345-622l55-58 200 200z"/>
-				</g>
-				<path d="M480-120v-80h280v-560H480v-80h280q33 0 57 24 23 23 23 56v560q0 33-23 57-24 23-57 23Z"/>
-			</svg>
-		`;
+			// Are we already logged in?
+			if (document.body.classList.contains("wp-admin")) return false;
+			if (document.getElementById("wpadminbar")) return false;
 
-		const loginLink = document.createElement("a");
-		loginLink.className = "loginLink";
-		loginLink.innerHTML = loginIcon;
-		loginLink.href = `//${location.host}/wp-admin`;
-		loginLink.title = "Login";
-		Object.assign(loginLink.style, {
-			width: "24px",
-			height: "24px",
-			position: "fixed",
-			inset: "3px 3px auto auto",
-			zIndex: "99999",
-			mixBlendMode: "difference",
+			// Are we in Breakdance Builder?
+			if (window.hasOwnProperty("Breakdance")) return false;
+
+			// Does it look like a WordPress site?
+			if (!document.querySelector(`[src*="/wp-content"], [href*="/wp-content"]`)) return false;
+
+			// Do we happen to already be on the login page?
+			if (document.querySelector(`form#loginform #wp-submit`)) return false;
+
+			console.log("WordPress login page found.");
+
+			if (loginLink = document.getElementsByClassName("loginLink")[0]) {
+				loginLink.href = loginURL;
+			} else {
+				const loginIcon = `
+					<svg fill="#fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+						<defs>
+							<style>
+								@keyframes inee {
+									33.333% {
+										translate: 60% 0;
+										animation-timing-function: step-start;
+									}
+									66.667% {
+										translate: -60% 0;
+									}
+								}
+								.loginLink {
+									svg {
+										vertical-align: unset;
+									}
+									g path {
+										animation: inee 1s linear infinite;
+										animation-play-state: paused;
+									}
+								}
+							</style>
+						</defs>
+						<clipPath id="clip">
+							<path d="M120-760h560v560H120z"/>
+						</clipPath>
+						<g clip-path="url(#clip)">
+							<path d="m400-280-55-58 102-102H120v-80h327L345-622l55-58 200 200z"/>
+						</g>
+						<path d="M480-120v-80h280v-560H480v-80h280q33 0 57 24 23 23 23 56v560q0 33-23 57-24 23-57 23Z"/>
+					</svg>
+				`;
+
+				const loginLink = document.createElement("a");
+				Object.assign(loginLink, {
+					className: "loginLink",
+					innerHTML: loginIcon,
+					href: loginURL,
+					title: "Login",
+				});
+				Object.assign(loginLink.style, {
+					width: "24px",
+					height: "24px",
+					position: "fixed",
+					inset: "3px 3px auto auto",
+					zIndex: "99999",
+					mixBlendMode: "difference",
+				});
+
+				document.body.appendChild(loginLink);
+				arrow = loginLink.querySelector(`g path`);
+				loginLink.addEventListener("mouseenter", () => arrow.style.animationPlayState = "running");
+				loginLink.addEventListener("mouseleave", () => {
+					arrow.addEventListener("animationiteration", ev => {
+						if (!loginLink.matches(`:hover`)) arrow.style.animationPlayState = "paused";
+					});
+				}, {once: true});
+			}
 		});
 
-		document.body.appendChild(loginLink);
-		arrow = loginLink.querySelector(`g path`);
-		loginLink.addEventListener("mouseenter", () => arrow.style.animationPlayState = "running");
-		loginLink.addEventListener("mouseleave", () => {
-			arrow.addEventListener("animationiteration", ev => {
-				if (!loginLink.matches(`:hover`)) arrow.style.animationPlayState = "paused";
-			});
-		}, {once: true});
-	});
+	};
+
+	checkLoginPage();
+
 }());

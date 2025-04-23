@@ -12,6 +12,14 @@ User script for augmenting WordPress development and administration.
 - A login button for simple sites from simple developers
 
 ## Changelog
+2.0.0
+- Added support for per-site custom WP login URL setting accessible as a
+  ViolentMonkey menu option just under the script itself. For cases where the
+  login is placed in a subdirectory or obfuscated by a custom URL or query
+  string. Uses [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
+  so the URLs are naturally divided per protocol, domain and port and never
+  leave your browser.
+
 1.9.6
 - Consider the presence of Breakdance Builder as sign of logged-innes.
 
