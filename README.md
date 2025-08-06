@@ -12,6 +12,9 @@ User script for augmenting WordPress development and administration.
 - A login button for simple sites from simple developers
 
 ## Changelog
+2.1.0
+- Exclude howtosolutions.net
+
 2.0.0
 - Added support for per-site custom WP login URL setting accessible as a
   ViolentMonkey menu option just under the script itself. For cases where the
