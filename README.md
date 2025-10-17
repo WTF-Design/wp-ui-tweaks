@@ -12,6 +12,10 @@ User script for augmenting WordPress development and administration.
 - A login button for simple sites from simple developers
 
 ## Changelog
+2.1.1
+- Only try run on HTML documents as not to generate errors on SVG etc.
+- Exclude thegeekstuff.com
+
 2.1.0
 - Exclude howtosolutions.net
 

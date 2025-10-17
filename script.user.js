@@ -4,9 +4,10 @@
 // @namespace   wtfdesign
 // @exclude     /howtosolutions\.net/
 // @exclude     /tecadmin\.net/
+// @exclude     /thegeekstuff\.com/
 // @exclude     /wpbeginner\.com/
 // @grant       GM_registerMenuCommand
-// @version     2.1.0
+// @version     2.1.1
 // @author      wtflm
 // @description WordPress Developer/Admin UI tweaks
 // ==/UserScript==
@@ -15,6 +16,9 @@
 (function() {
 	// Don't run in iframes
 	if (window.self !== window.top) return false;
+
+	// Only run on HTML
+	if (!document.head) return false;
 
 	let defaultLoginURL = `//${location.host}/wp-admin`;
 	let loginURL = localStorage.wtfWpLoginURL ?? defaultLoginURL;
