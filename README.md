@@ -12,6 +12,10 @@ User script for augmenting WordPress development and administration.
 - A login button for simple sites from simple developers
 
 ## Changelog
+2.1.2
+- Disable running on bare IP HTTP URLs because the uprage-insecure-requests meta
+  tag might interfere with router admin interfaces and such
+
 2.1.1
 - Only try run on HTML documents as not to generate errors on SVG etc.
 - Exclude thegeekstuff.com
