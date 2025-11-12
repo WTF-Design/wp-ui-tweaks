@@ -13,7 +13,7 @@ User script for augmenting WordPress development and administration.
 
 ## Changelog
 2.1.2
-- Disable running on bare IP HTTP URLs because the uprage-insecure-requests meta
+- Disable running on bare IP HTTP URLs because the upgrade-insecure-requests meta
   tag might interfere with router admin interfaces and such
 
 2.1.1
