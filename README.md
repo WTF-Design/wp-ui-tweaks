@@ -12,6 +12,10 @@ User script for augmenting WordPress development and administration.
 - A login button for simple sites from simple developers
 
 ## Changelog
+2.2.0
+- Move a bunch of supposed early returns to where they should be to reduce the
+  number of login page requests on decidedly non-wp sites.
+
 2.1.2
 - Disable running on bare IP HTTP URLs because the uprage-insecure-requests meta
   tag might interfere with router admin interfaces and such

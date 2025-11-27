@@ -8,7 +8,7 @@
 // @exclude     /thegeekstuff\.com/
 // @exclude     /wpbeginner\.com/
 // @grant       GM_registerMenuCommand
-// @version     2.1.2
+// @version     2.2.0
 // @author      wtflm
 // @description WordPress Developer/Admin UI tweaks
 // ==/UserScript==
@@ -20,6 +20,19 @@
 
 	// Only run on HTML
 	if (!document.head) return false;
+
+	// Are we already logged in?
+	if (document.body.classList.contains("wp-admin")) return false;
+	if (document.getElementById("wpadminbar")) return false;
+
+	// Are we in Breakdance Builder?
+	if (window.hasOwnProperty("Breakdance")) return false;
+
+	// Does it look like a WordPress site?
+	if (!document.querySelector(`[src*="/wp-content"], [href*="/wp-content"]`)) return false;
+
+	// Do we happen to already be on the login page?
+	if (document.querySelector(`form#loginform #wp-submit`)) return false;
 
 	let defaultLoginURL = `//${location.host}/wp-admin`;
 	let loginURL = localStorage.wtfWpLoginURL ?? defaultLoginURL;
@@ -66,19 +79,6 @@
 			if (loginURL != defaultLoginURL) {
 				GM_registerMenuCommand(menuCommandLabels.chg, promptForLoginUrl, {id: "menuCommand", title: menuCommandTitles.chg, autoClose: false});
 			}
-
-			// Are we already logged in?
-			if (document.body.classList.contains("wp-admin")) return false;
-			if (document.getElementById("wpadminbar")) return false;
-
-			// Are we in Breakdance Builder?
-			if (window.hasOwnProperty("Breakdance")) return false;
-
-			// Does it look like a WordPress site?
-			if (!document.querySelector(`[src*="/wp-content"], [href*="/wp-content"]`)) return false;
-
-			// Do we happen to already be on the login page?
-			if (document.querySelector(`form#loginform #wp-submit`)) return false;
 
 			console.log("WordPress login page found.");
 
