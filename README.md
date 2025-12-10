@@ -12,6 +12,10 @@ User script for augmenting WordPress development and administration.
 - A login button for simple sites from simple developers
 
 ## Changelog
+2.3.0
+- Supply dummy HTTP Basic Authentication header to avoid both the pop-up dialog
+  and maintaining an ever-growing site exclude-list.
+
 2.2.0
 - Move a bunch of supposed early returns to where they should be to reduce the
   number of login page requests on decidedly non-wp sites.
